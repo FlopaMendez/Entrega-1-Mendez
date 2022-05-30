@@ -17,7 +17,9 @@ Simula una pagina para una empesa de asesoría que necesita poder cargar/elimina
  - Cantidad de horas trabajadas según cliente
  
 ## Comienzar su navegacion desde:
+**(luego de correr migraciones y runserver)**
 
 http://localhost:8000/home/
+
 
 Desde esta página se podrá redirigirse a cualquiera de las categorias mencionadas antes. Además se podrá Agregar, Borrar, Buscar y Listar en cada una de ellas, y navegar entre ellas.
