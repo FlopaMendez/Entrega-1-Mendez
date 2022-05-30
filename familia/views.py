@@ -198,9 +198,9 @@ def borrar_horas(request, identificador):
     la persona fue eliminada con éxito        
     '''
     if request.method == "GET":
-        horas_clientes = HorasCliente.objects.filter(id=int(identificador)).first()
-        if horas_clientes:
-            horas_clientes.delete()
+        horas_cliente = HorasCliente.objects.filter(id=int(identificador)).first()
+        if horas_cliente:
+            horas_cliente.delete()
         return HttpResponseRedirect("/horas_clientes")
     else:
         return HttpResponseBadRequest("Error no conzco ese metodo para esta request")

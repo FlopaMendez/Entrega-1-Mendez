@@ -9,10 +9,10 @@
     <div class="col">
       {% url 'agregar_horas' as agregar_horas_url %}
       <!-- {% url 'buscar_cliente' as buscar_cliente_url %} -->
-      <!-- {% url 'clientes' as clientes_url %} -->
+      <!-- {% url 'Lista Horas' as horas_clientes_url %} -->
       {% bootstrap_button "Agregar Horas" button_class="btn-success" button_type="link" href=agregar_horas_url %} 
-      <!-- {% bootstrap_button "Buscar Cliente" button_class="btn-success" button_type="link" href=buscar_cliente_url %}  
-      {% bootstrap_button "Lista Cliente" button_class="btn-success" button_type="link" href=clientes_url %}   -->
+      <!-- {% bootstrap_button "Buscar Cliente" button_class="btn-success" button_type="link" href=buscar_cliente_url %}   -->
+      <!-- {% bootstrap_button "Lista Horas" button_class="btn-success" button_type="link" href=horas_clientes_url %}  -->
     <div>
   <div>
 
@@ -35,7 +35,7 @@
                     <td> {{h.fecha_de_trabajo}} </td>
                     <td> {{h.horas_trabajadas}} </td>
                     {% url 'borrar_horas' identificador=h.id as borrar_horas_url %}
-                    <td>{% bootstrap_button "Borrar" size="sm" button_class="btn-danger" button_type="link" href=borrar_cliente_url %}</td>
+                    <td>{% bootstrap_button "Borrar" size="sm" button_class="btn-danger" button_type="link" href=borrar_horas_url %}</td>
                 </tr>  
             </tbody>
             {% endfor %}

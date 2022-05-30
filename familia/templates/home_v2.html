@@ -6,9 +6,14 @@
 
 {# Display django.contrib.messages as Bootstrap alerts #}
 {% bootstrap_messages %}
+<ul class="nav fixed">
+<div class="container">   
+    <a class="col" href="{%url  'home' %}"><br> <h3> Empresa de Servicios de Asesoría </h3> </a>
+  </li>
+</ul>
 <div class="container">    
   
-  <div class="row">
+  <div class="raw">
     <div class="col">
       {% url 'clientes' as clientes_url %} <br>
       {% url 'empleados' as empleados_url %}<br>
@@ -49,7 +54,7 @@
             {% endfor %}
         </table>
         {% else %}
-            <p>Seleccione a donde quiere ingresar</p>
+            <p><h5>Seleccione a donde quiere ingresar</h5></p>
         {% endif %}
     </div>
   </div>
