@@ -1,15 +1,15 @@
 from django.http import HttpResponse, HttpResponseRedirect, HttpResponseBadRequest
 from django.template import loader
 from django.shortcuts import render
-from familia.forms import PersonaForm, BuscarPersonasForm
+from familia.forms import BuscarEmpleadoForm, EmpleadoForm
 
 from familia.models import Empleado
 
 def index(request):
-    personas = Empleado.objects.all()
+    empleados = Empleado.objects.all()
     template = loader.get_template('familia/lista_empleados.html')
     context = {
-        'personas': personas,
+        'empleados': empleados,
     }
     return HttpResponse(template.render(context, request))
 
@@ -21,7 +21,7 @@ def agregar(request):
     '''
 
     if request.method == "POST":
-        form = PersonaForm(request.POST)
+        form = EmpleadoForm(request.POST)
         if form.is_valid():
 
             nombre = form.cleaned_data['nombre']
@@ -33,7 +33,7 @@ def agregar(request):
 
             return HttpResponseRedirect("/")
     elif request.method == "GET":
-        form = PersonaForm()
+        form = EmpleadoForm()
     else:
         return HttpResponseBadRequest("Error no conzco ese metodo para esta request")
 
@@ -47,9 +47,9 @@ def borrar(request, identificador):
     la persona fue eliminada con éxito        
     '''
     if request.method == "GET":
-        persona = Empleado.objects.filter(id=int(identificador)).first()
-        if persona:
-            persona.delete()
+        empleado = Empleado.objects.filter(id=int(identificador)).first()
+        if empleado:
+            empleado.delete()
         return HttpResponseRedirect("/")
     else:
         return HttpResponseBadRequest("Error no conzco ese metodo para esta request")
@@ -64,14 +64,14 @@ def actualizar(request, identificador):
 
 def buscar(request):
     if request.method == "GET":
-        form_busqueda = BuscarPersonasForm()
+        form_busqueda = BuscarEmpleadoForm()
         return render(request, 'familia/form_busqueda.html', {"form_busqueda": form_busqueda})
 
     elif request.method == "POST":
-        form_busqueda = BuscarPersonasForm(request.POST)
+        form_busqueda = BuscarEmpleadoForm(request.POST)
         if form_busqueda.is_valid():
             palabra_a_buscar = form_busqueda.cleaned_data['palabra_a_buscar']
-            personas = Empleado.objects.filter(nombre__icontains=palabra_a_buscar)
+            empleados = Empleado.objects.filter(nombre__icontains=palabra_a_buscar)
 
-        return  render(request, 'familia/lista_empleados.html', {"personas": personas})
+        return  render(request, 'familia/lista_empleados.html', {"empleados": empleados})
     

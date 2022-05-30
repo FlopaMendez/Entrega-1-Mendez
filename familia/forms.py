@@ -1,6 +1,6 @@
 from django import forms
 
-class PersonaForm(forms.Form):
+class EmpleadoForm(forms.Form):
     nombre = forms.CharField(label="Nombre", max_length=100)
     apellido = forms.CharField(label="Apellido", max_length=100)
     email = forms.EmailField(label="Email")
@@ -10,5 +10,5 @@ class PersonaForm(forms.Form):
     widget=forms.TextInput(attrs={'placeholder': '30/12/1995'}))
     dni = forms.IntegerField(widget=forms.NumberInput(attrs={'placeholder': "sin puntos ni espacios"}))
 
-class BuscarPersonasForm(forms.Form):
+class BuscarEmpleadoForm(forms.Form):
     palabra_a_buscar = forms.CharField(label="Buscar")

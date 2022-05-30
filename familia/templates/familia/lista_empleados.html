@@ -16,7 +16,7 @@
 
   <div class="row">
     <div class="col">
-        {% if personas %}
+        {% if empleados %}
         <table class="table">
             <thead>
                 <th scope="col">Identificador</th>
@@ -28,16 +28,16 @@
                 <th scope="col">Acciones</th>
             </thead>
         
-            {% for p in personas %}
+            {% for e in empleados %}
             <tbody>
                 <tr>
-                    <th scope="row">{{p.id}} </th>
-                    <td> {{p.nombre}} </td>
-                    <td> {{p.apellido}} </td>
-                    <td> {{p.email}} </td>
-                    <td> {{p.fecha_nacimiento}} </td>
-                    <td> {{p.dni}} </td>
-                    {% url 'borrar' identificador=p.id as borrar_url %}
+                    <th scope="row">{{e.id}} </th>
+                    <td> {{e.nombre}} </td>
+                    <td> {{e.apellido}} </td>
+                    <td> {{e.email}} </td>
+                    <td> {{e.fecha_nacimiento}} </td>
+                    <td> {{e.dni}} </td>
+                    {% url 'borrar' identificador=e.id as borrar_url %}
                     <td>{% bootstrap_button "Borrar" size="sm" button_class="btn-danger" button_type="link" href=borrar_url %}</td>
                 </tr>  
             </tbody>
