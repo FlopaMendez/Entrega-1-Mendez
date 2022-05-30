@@ -1,8 +1,11 @@
-{% extends "index.html" %}
-
 {% load bootstrap5 %}
 
-{% block cuerpo %}
+{# Load CSS and JavaScript #}
+{% bootstrap_css %}
+{% bootstrap_javascript %}
+
+{# Display django.contrib.messages as Bootstrap alerts #}
+{% bootstrap_messages %}
 <div class="container">    
   
   <div class="row">
@@ -49,4 +52,11 @@
     </div>
   </div>
 </div>
-{% endblock %}
+
+
+<!-- <esto es el pie/ footer > -->
+<ul class="nav bg-dark fixed-bottom justify-content-center">
+  <li class="nav-item">
+    <a class="nav-link active" href="/home">coder house - python 36585 - ENTREGA 1 | MENDEZ</a>
+  </li>
+</ul>

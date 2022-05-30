@@ -9,7 +9,7 @@ from familia.models import Cliente, Empleado
 # --------VIWS HOME:
 
 def ir_a_home(request):
-    template = loader.get_template('home.html')
+    template = loader.get_template('home_v2.html')
     context = {}
     return HttpResponse(template.render(context, request))
 
@@ -43,7 +43,7 @@ def agregar_empleado(request):
             dni = form.cleaned_data['dni']
             Empleado(nombre=nombre, apellido=apellido, email=email, fecha_nacimiento=fecha_nacimiento, dni=dni).save()
 
-            return HttpResponseRedirect("/")
+            return HttpResponseRedirect("/empleados")
 
     elif request.method == "GET":
         form = EmpleadoForm()
@@ -64,7 +64,7 @@ def borrar_empleado(request, identificador):
         empleado = Empleado.objects.filter(id=int(identificador)).first()
         if empleado:
             empleado.delete()
-        return HttpResponseRedirect("/")
+        return HttpResponseRedirect("/empleados")
     else:
         return HttpResponseBadRequest("Error no conzco ese metodo para esta request")
 
@@ -113,7 +113,7 @@ def agregar_cliente(request):
             cobro_mensual_honorarios = form.cleaned_data['cobro_mensual_honorarios']
             Cliente(nombre_empresa=nombre_empresa, cuit_empresa=cuit_empresa, nombre_contacto=nombre_contacto, cargo_contacto=cargo_contacto, cobro_mensual_honorarios=cobro_mensual_honorarios).save()
 
-            return HttpResponseRedirect("/")
+            return HttpResponseRedirect("/clientes")
 
     elif request.method == "GET":
         form = ClienteForm()
@@ -134,7 +134,7 @@ def borrar_cliente(request, identificador):
         cliente = Cliente.objects.filter(id=int(identificador)).first()
         if cliente:
             cliente.delete()
-        return HttpResponseRedirect("/")
+        return HttpResponseRedirect("/clientes")
     else:
         return HttpResponseBadRequest("Error no conzco ese metodo para esta request")
 

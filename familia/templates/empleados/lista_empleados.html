@@ -1,4 +1,4 @@
-{% extends "index.html" %}
+{% extends "empleados/base_empleados.html" %}
 
 {% load bootstrap5 %}
 
@@ -9,8 +9,10 @@
     <div class="col">
       {% url 'agregar_empleado' as agregar_empleado_url %}
       {% url 'buscar_empleado' as buscar_empleado_url %}
+      {% url 'empleados' as empleados_url %}
       {% bootstrap_button "Agregar Empleado" button_class="btn-success" button_type="link" href=agregar_empleado_url %} 
       {% bootstrap_button "Buscar Empleado" button_class="btn-success" button_type="link" href=buscar_empleado_url %}  
+      {% bootstrap_button "Lista Empleados" button_class="btn-success" button_type="link" href=empleados_url %}  
     <div>
   <div>
 

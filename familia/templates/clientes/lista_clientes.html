@@ -1,4 +1,4 @@
-{% extends "index.html" %}
+{% extends "clientes/base_clientes.html" %}
 
 {% load bootstrap5 %}
 
@@ -9,8 +9,10 @@
     <div class="col">
       {% url 'agregar_cliente' as agregar_cliente_url %}
       {% url 'buscar_cliente' as buscar_cliente_url %}
+      {% url 'clientes' as clientes_url %}
       {% bootstrap_button "Agregar Cliente" button_class="btn-success" button_type="link" href=agregar_cliente_url %} 
       {% bootstrap_button "Buscar Cliente" button_class="btn-success" button_type="link" href=buscar_cliente_url %}  
+      {% bootstrap_button "Lista Cliente" button_class="btn-success" button_type="link" href=clientes_url %}  
     <div>
   <div>
 
