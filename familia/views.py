@@ -1,15 +1,20 @@
 from django.http import HttpResponse, HttpResponseRedirect, HttpResponseBadRequest
 from django.template import loader
 from django.shortcuts import render
-from familia.forms import BuscarEmpleadoForm, EmpleadoForm
+from familia.forms import BuscarClienteForm, BuscarEmpleadoForm, ClienteForm, EmpleadoForm
 
-from familia.models import Clientes, Empleado
+from familia.models import Cliente, Empleado
+
+
+# --------VIWS HOME:
 
 def ir_a_home(request):
     template = loader.get_template('home.html')
     context = {}
     return HttpResponse(template.render(context, request))
 
+
+# --------VIWS EMPLEADOS:
 
 def ir_a_empleados(request):
     empleados = Empleado.objects.all()
@@ -18,6 +23,7 @@ def ir_a_empleados(request):
         'empleados': empleados,
     }
     return HttpResponse(template.render(context, request))
+
 
 
 def agregar_empleado(request):
@@ -48,6 +54,7 @@ def agregar_empleado(request):
     return render(request, 'empleados/form_carga.html', {'form': form})
 
 
+
 def borrar_empleado(request, identificador):
     '''
     TODO: agregar un mensaje en el template index.html que avise al usuario que 
@@ -61,12 +68,6 @@ def borrar_empleado(request, identificador):
     else:
         return HttpResponseBadRequest("Error no conzco ese metodo para esta request")
 
-
-# def actualizar(request, identificador):
-#     '''
-#     TODO: implementar una vista para actualización
-#     '''
-#     pass
 
 
 def buscar_empleado(request):
@@ -84,11 +85,70 @@ def buscar_empleado(request):
     
 
 
+# --------VIWS CLIENTES:
 
 def ir_a_clientes(request):
-    clientes = Clientes.objects.all()
+    clientes = Cliente.objects.all()
     template = loader.get_template('clientes/lista_clientes.html')
     context = {
         'clientes': clientes,
     }
     return HttpResponse(template.render(context, request))
+
+
+def agregar_cliente(request):
+    '''
+    TODO: agregar un mensaje en el template index.html que avise al usuario que 
+    la persona fue cargada con éxito
+    '''
+
+    if request.method == "POST":
+        form = ClienteForm(request.POST)
+        if form.is_valid():
+
+            nombre_empresa = form.cleaned_data['nombre_empresa']
+            cuit_empresa = form.cleaned_data['cuit_empresa']
+            nombre_contacto = form.cleaned_data['nombre_contacto']
+            cargo_contacto = form.cleaned_data['cargo_contacto']
+            cobro_mensual_honorarios = form.cleaned_data['cobro_mensual_honorarios']
+            Cliente(nombre_empresa=nombre_empresa, cuit_empresa=cuit_empresa, nombre_contacto=nombre_contacto, cargo_contacto=cargo_contacto, cobro_mensual_honorarios=cobro_mensual_honorarios).save()
+
+            return HttpResponseRedirect("/")
+
+    elif request.method == "GET":
+        form = ClienteForm()
+    else:
+        return HttpResponseBadRequest("Error no conzco ese metodo para esta request")
+
+    
+    return render(request, 'clientes/form_carga_clientes.html', {'form': form})
+
+
+
+def borrar_cliente(request, identificador):
+    '''
+    TODO: agregar un mensaje en el template index.html que avise al usuario que 
+    la persona fue eliminada con éxito        
+    '''
+    if request.method == "GET":
+        cliente = Cliente.objects.filter(id=int(identificador)).first()
+        if cliente:
+            cliente.delete()
+        return HttpResponseRedirect("/")
+    else:
+        return HttpResponseBadRequest("Error no conzco ese metodo para esta request")
+
+
+
+def buscar_cliente(request):
+    if request.method == "GET":
+        form_busqueda = BuscarClienteForm()
+        return render(request, 'clientes/form_busqueda_cliente.html', {"form_busqueda": form_busqueda})
+
+    elif request.method == "POST":
+        form_busqueda = BuscarClienteForm(request.POST)
+        if form_busqueda.is_valid():
+            palabra_a_buscar = form_busqueda.cleaned_data['palabra_a_buscar']
+            clientes = Cliente.objects.filter(nombre_empresa__icontains=palabra_a_buscar)
+
+        return  render(request, 'clientes/lista_clientes.html', {"clientes": clientes})

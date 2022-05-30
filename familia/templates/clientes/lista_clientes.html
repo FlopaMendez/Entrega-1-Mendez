@@ -7,10 +7,10 @@
   
   <div class="row">
     <div class="col">
-      {% url 'agregar clientes' as agregar_clientes_url %}
-      {% url 'buscar clientes' as buscar_clientes_url %}
-      {% bootstrap_button "Agregar Clientes" button_class="btn-success" button_type="link" href=agregar_clientes_url %} 
-      {% bootstrap_button "Buscar Clientes" button_class="btn-success" button_type="link" href=buscar_clientes_url %}  
+      {% url 'agregar_cliente' as agregar_cliente_url %}
+      {% url 'buscar_cliente' as buscar_cliente_url %}
+      {% bootstrap_button "Agregar Cliente" button_class="btn-success" button_type="link" href=agregar_cliente_url %} 
+      {% bootstrap_button "Buscar Cliente" button_class="btn-success" button_type="link" href=buscar_cliente_url %}  
     <div>
   <div>
 
@@ -32,13 +32,13 @@
             <tbody>
                 <tr>
                     <th scope="row">{{c.id}} </th>
-                    <td> {{c.nombre}} </td>
-                    <td> {{c.apellido}} </td>
-                    <td> {{c.email}} </td>
-                    <td> {{c.fecha_nacimiento}} </td>
-                    <td> {{c.dni}} </td>
+                    <td> {{c.nombre_empresa}} </td>
+                    <td> {{c.cuit_empresa}} </td>
+                    <td> {{c.nombre_contacto}} </td>
+                    <td> {{c.cargo_contacto}} </td>
+                    <td> $ {{c.cobro_mensual_honorarios}} </td>
                     {% url 'borrar_cliente' identificador=c.id as borrar_cliente_url %}
-                    <td>{% bootstrap_button "Borrar Cliente" size="sm" button_class="btn-danger" button_type="link" href=borrar_cliente_url %}</td>
+                    <td>{% bootstrap_button "Borrar" size="sm" button_class="btn-danger" button_type="link" href=borrar_cliente_url %}</td>
                 </tr>  
             </tbody>
             {% endfor %}

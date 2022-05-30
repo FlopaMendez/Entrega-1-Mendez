@@ -12,7 +12,7 @@ class Home(models.Model):
     clientes = "CLIENTES"
     empleados = "EMPLEADOS"
 
-class Clientes(models.Model):
+class Cliente(models.Model):
     nombre_empresa = models.CharField(max_length=100)
     cuit_empresa = models.IntegerField()
     nombre_contacto = models.CharField(max_length=100)

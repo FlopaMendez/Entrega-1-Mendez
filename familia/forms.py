@@ -12,3 +12,17 @@ class EmpleadoForm(forms.Form):
 
 class BuscarEmpleadoForm(forms.Form):
     palabra_a_buscar = forms.CharField(label="Buscar")
+
+
+
+class ClienteForm(forms.Form):
+    nombre_empresa = forms.CharField(label="Empresa", max_length=100)
+    cuit_empresa = forms.IntegerField(widget=forms.NumberInput(attrs={'placeholder': "sin guiones ni espacios"}))
+    nombre_contacto = forms.CharField(label="Contacto", max_length=100)
+    cargo_contacto = forms.CharField(label="Cargo Contacto", max_length=100)
+    cobro_mensual_honorarios = forms.FloatField(label="Honorarios mensuales")
+    
+    
+
+class BuscarClienteForm(forms.Form):
+    palabra_a_buscar = forms.CharField(label="Buscar")
