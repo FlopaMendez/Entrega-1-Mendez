@@ -1,0 +1,49 @@
+{% extends "horas_clientes/base_horas_clientes.html" %}
+
+{% load bootstrap5 %}
+
+{% block cuerpo %}
+<div class="container">    
+  
+  <div class="row">
+    <div class="col">
+      {% url 'agregar_horas' as agregar_horas_url %}
+      <!-- {% url 'buscar_cliente' as buscar_cliente_url %} -->
+      <!-- {% url 'clientes' as clientes_url %} -->
+      {% bootstrap_button "Agregar Horas" button_class="btn-success" button_type="link" href=agregar_horas_url %} 
+      <!-- {% bootstrap_button "Buscar Cliente" button_class="btn-success" button_type="link" href=buscar_cliente_url %}  
+      {% bootstrap_button "Lista Cliente" button_class="btn-success" button_type="link" href=clientes_url %}   -->
+    <div>
+  <div>
+
+  <div class="row">
+    <div class="col">
+        {% if horas_clientes %}
+        <table class="table">
+            <thead>
+                <th scope="col">Identificador</th>
+                <th scope="col">Empresa</th>
+                <th scope="col">Fecha de realización de Trabajo</th>
+                <th scope="col">Horas trabajadas</th>
+            </thead>
+        
+            {% for h in horas_clientes %}
+            <tbody>
+                <tr>
+                    <th scope="row">{{h.id}} </th>
+                    <td> {{h.nombre_cliente}} </td>
+                    <td> {{h.fecha_de_trabajo}} </td>
+                    <td> {{h.horas_trabajadas}} </td>
+                    {% url 'borrar_horas' identificador=h.id as borrar_horas_url %}
+                    <td>{% bootstrap_button "Borrar" size="sm" button_class="btn-danger" button_type="link" href=borrar_cliente_url %}</td>
+                </tr>  
+            </tbody>
+            {% endfor %}
+        </table>
+        {% else %}
+            <p>No tienes horas cargados</p>
+        {% endif %}
+    </div>
+  </div>
+</div>
+{% endblock %}

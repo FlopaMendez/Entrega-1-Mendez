@@ -13,4 +13,7 @@ urlpatterns = [
     path('agregar_cliente/', views.agregar_cliente, name="agregar_cliente"),
     path('borrar_cliente/<identificador>', views.borrar_cliente, name="borrar_cliente"),
     path('buscar_cliente/', views.buscar_cliente, name="buscar_cliente"),
+    path('horas_clientes/', views.ir_a_horas, name="horas_clientes"),
+    path('agregar_horas/', views.agregar_horas, name="agregar_horas"),
+    path('borrar_horas/<identificador>', views.borrar_horas, name="borrar_horas"),
 ]

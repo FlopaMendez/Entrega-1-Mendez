@@ -12,8 +12,10 @@
     <div class="col">
       {% url 'clientes' as clientes_url %} <br>
       {% url 'empleados' as empleados_url %}<br>
+      {% url 'horas_clientes' as horas_clientes_url %}<br>
       <br>{% bootstrap_button "CLIENTES" button_class="btn-success" button_type="link" href=clientes_url %} 
-      <br><br>{% bootstrap_button "EMPLEADOS" button_class="btn-success" button_type="link" href=empleados_url %} <br><br>
+      <br><br>{% bootstrap_button "EMPLEADOS" button_class="btn-success" button_type="link" href=empleados_url %} 
+      <br><br>{% bootstrap_button "CARGAR HORAS" button_class="btn-success" button_type="link" href=horas_clientes_url %} <br><br>
     <div>
   <div>
 

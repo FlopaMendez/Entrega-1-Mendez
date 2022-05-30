@@ -5,7 +5,7 @@ class EmpleadoForm(forms.Form):
     apellido = forms.CharField(label="Apellido", max_length=100)
     email = forms.EmailField(label="Email")
     # input_format hace que se pueda ingresar la fecha con el formato latino, dia/mes/año
-    fecha_nacimiento = forms.DateField(label="fecha_nacimiento", input_formats=["%d/%m/%Y"],
+    fecha_nacimiento = forms.DateField(label="Fecha de Nacimiento", input_formats=["%d/%m/%Y"],
     #widget es para poder agregar un tip para que el usuario sepa como ingresar la fecha
     widget=forms.TextInput(attrs={'placeholder': '30/12/1995'}))
     dni = forms.IntegerField(widget=forms.NumberInput(attrs={'placeholder': "sin puntos ni espacios"}))
@@ -26,3 +26,15 @@ class ClienteForm(forms.Form):
 
 class BuscarClienteForm(forms.Form):
     palabra_a_buscar = forms.CharField(label="Buscar")
+
+
+
+class HorasForm(forms.Form):
+    nombre_cliente = forms.CharField(label="Cliente", max_length=100)
+    fecha_de_trabajo = forms.DateField(label="Fecha de realización del Trabajo", input_formats=["%d/%m/%Y"],
+    widget=forms.TextInput(attrs={'placeholder': '30/12/1995'}))
+    horas_trabajadas = forms.FloatField(label="Horas Trabajadas")
+    
+
+    
+    

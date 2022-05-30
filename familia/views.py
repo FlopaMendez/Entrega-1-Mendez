@@ -1,12 +1,12 @@
 from django.http import HttpResponse, HttpResponseRedirect, HttpResponseBadRequest
 from django.template import loader
 from django.shortcuts import render
-from familia.forms import BuscarClienteForm, BuscarEmpleadoForm, ClienteForm, EmpleadoForm
+from familia.forms import BuscarClienteForm, BuscarEmpleadoForm, ClienteForm, EmpleadoForm, HorasForm
 
-from familia.models import Cliente, Empleado
+from familia.models import Cliente, Empleado, HorasCliente
 
 
-# --------VIWS HOME:
+# --------VIEWS HOME:
 
 def ir_a_home(request):
     template = loader.get_template('home_v2.html')
@@ -14,7 +14,7 @@ def ir_a_home(request):
     return HttpResponse(template.render(context, request))
 
 
-# --------VIWS EMPLEADOS:
+# --------VIEWS EMPLEADOS:
 
 def ir_a_empleados(request):
     empleados = Empleado.objects.all()
@@ -85,7 +85,7 @@ def buscar_empleado(request):
     
 
 
-# --------VIWS CLIENTES:
+# --------VIEWS CLIENTES:
 
 def ir_a_clientes(request):
     clientes = Cliente.objects.all()
@@ -152,3 +152,55 @@ def buscar_cliente(request):
             clientes = Cliente.objects.filter(nombre_empresa__icontains=palabra_a_buscar)
 
         return  render(request, 'clientes/lista_clientes.html', {"clientes": clientes})
+
+
+# --------VIEWS HORAS TRABAJADAS:
+
+def ir_a_horas(request):
+    horas_clientes = HorasCliente.objects.all()
+    template = loader.get_template('horas_clientes/lista_horas_clientes.html')
+    context = {
+        'horas_clientes': horas_clientes,
+    }
+    return HttpResponse(template.render(context, request))
+
+
+
+def agregar_horas(request):
+    '''
+    TODO: agregar un mensaje en el template index.html que avise al usuario que 
+    la persona fue cargada con éxito
+    '''
+
+    if request.method == "POST":
+        form = HorasForm(request.POST)
+        if form.is_valid():
+
+            nombre_cliente = form.cleaned_data['nombre_cliente']
+            fecha_de_trabajo = form.cleaned_data['fecha_de_trabajo']
+            horas_trabajadas = form.cleaned_data['horas_trabajadas']
+            HorasCliente(nombre_cliente=nombre_cliente, fecha_de_trabajo=fecha_de_trabajo, horas_trabajadas=horas_trabajadas).save()
+
+            return HttpResponseRedirect("/horas_clientes")
+
+    elif request.method == "GET":
+        form = HorasForm()
+    else:
+        return HttpResponseBadRequest("Error no conzco ese metodo para esta request")
+
+    
+    return render(request, 'horas_clientes/form_carga_horas.html', {'form': form})
+
+
+def borrar_horas(request, identificador):
+    '''
+    TODO: agregar un mensaje en el template index.html que avise al usuario que 
+    la persona fue eliminada con éxito        
+    '''
+    if request.method == "GET":
+        horas_clientes = HorasCliente.objects.filter(id=int(identificador)).first()
+        if horas_clientes:
+            horas_clientes.delete()
+        return HttpResponseRedirect("/horas_clientes")
+    else:
+        return HttpResponseBadRequest("Error no conzco ese metodo para esta request")
