@@ -3,11 +3,11 @@ from django.template import loader
 from django.shortcuts import render
 from familia.forms import PersonaForm, BuscarPersonasForm
 
-from familia.models import Persona
+from familia.models import Empleado
 
 def index(request):
-    personas = Persona.objects.all()
-    template = loader.get_template('familia/lista_familiares.html')
+    personas = Empleado.objects.all()
+    template = loader.get_template('familia/lista_empleados.html')
     context = {
         'personas': personas,
     }
@@ -28,8 +28,8 @@ def agregar(request):
             apellido = form.cleaned_data['apellido']
             email = form.cleaned_data['email']
             fecha_nacimiento = form.cleaned_data['fecha_nacimiento']
-            dni = form.cleaned_data['altura']
-            Persona(nombre=nombre, apellido=apellido, email=email, fecha_nacimiento=fecha_nacimiento, dni=dni).save()
+            dni = form.cleaned_data['dni']
+            Empleado(nombre=nombre, apellido=apellido, email=email, fecha_nacimiento=fecha_nacimiento, dni=dni).save()
 
             return HttpResponseRedirect("/")
     elif request.method == "GET":
@@ -47,7 +47,7 @@ def borrar(request, identificador):
     la persona fue eliminada con éxito        
     '''
     if request.method == "GET":
-        persona = Persona.objects.filter(id=int(identificador)).first()
+        persona = Empleado.objects.filter(id=int(identificador)).first()
         if persona:
             persona.delete()
         return HttpResponseRedirect("/")
@@ -71,7 +71,7 @@ def buscar(request):
         form_busqueda = BuscarPersonasForm(request.POST)
         if form_busqueda.is_valid():
             palabra_a_buscar = form_busqueda.cleaned_data['palabra_a_buscar']
-            personas = Persona.objects.filter(nombre__icontains=palabra_a_buscar)
+            personas = Empleado.objects.filter(nombre__icontains=palabra_a_buscar)
 
-        return  render(request, 'familia/lista_familiares.html', {"personas": personas})
+        return  render(request, 'familia/lista_empleados.html', {"personas": personas})
     
