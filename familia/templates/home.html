@@ -1,4 +1,4 @@
-{% extends "familia/index.html" %}
+{% extends "index.html" %}
 
 {% load bootstrap5 %}
 
@@ -7,10 +7,10 @@
   
   <div class="row">
     <div class="col">
-      {% url 'agregar' as agregar_url %}
-      {% url 'buscar' as buscar_url %}
-      {% bootstrap_button "Agregar" button_class="btn-success" button_type="link" href=agregar_url %} 
-      {% bootstrap_button "Buscar" button_class="btn-success" button_type="link" href=buscar_url %}  
+      {% url 'clientes' as clientes_url %} <br>
+      {% url 'empleados' as empleados_url %}<br>
+      <br>{% bootstrap_button "CLIENTES" button_class="btn-success" button_type="link" href=clientes_url %} 
+      <br><br>{% bootstrap_button "EMPLEADOS" button_class="btn-success" button_type="link" href=empleados_url %} <br><br>
     <div>
   <div>
 
@@ -44,7 +44,7 @@
             {% endfor %}
         </table>
         {% else %}
-            <p>No tienes empleados cargados</p>
+            <p>Seleccione a donde quiere ingresar</p>
         {% endif %}
     </div>
   </div>

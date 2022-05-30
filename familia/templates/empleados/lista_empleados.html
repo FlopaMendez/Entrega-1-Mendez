@@ -1,0 +1,52 @@
+{% extends "index.html" %}
+
+{% load bootstrap5 %}
+
+{% block cuerpo %}
+<div class="container">    
+  
+  <div class="row">
+    <div class="col">
+      {% url 'agregar_empleado' as agregar_empleado_url %}
+      {% url 'buscar_empleado' as buscar_empleado_url %}
+      {% bootstrap_button "Agregar" button_class="btn-success" button_type="link" href=agregar_empleado_url %} 
+      {% bootstrap_button "Buscar" button_class="btn-success" button_type="link" href=buscar_empleado_url %}  
+    <div>
+  <div>
+
+  <div class="row">
+    <div class="col">
+        {% if empleados %}
+        <table class="table">
+            <thead>
+                <th scope="col">Identificador</th>
+                <th scope="col">Nombre</th>
+                <th scope="col">Apellido</th>
+                <th scope="col">Email</th>
+                <th scope="col">Fecha Nacimiento</th>
+                <th scope="col">DNI</th>
+                <th scope="col">Acciones</th>
+            </thead>
+        
+            {% for e in empleados %}
+            <tbody>
+                <tr>
+                    <th scope="row">{{e.id}} </th>
+                    <td> {{e.nombre}} </td>
+                    <td> {{e.apellido}} </td>
+                    <td> {{e.email}} </td>
+                    <td> {{e.fecha_nacimiento}} </td>
+                    <td> {{e.dni}} </td>
+                    {% url 'borrar_empleado' identificador=e.id as borrar_empleado_url %}
+                    <td>{% bootstrap_button "Borrar" size="sm" button_class="btn-danger" button_type="link" href=borrar_empleado_url %}</td>
+                </tr>  
+            </tbody>
+            {% endfor %}
+        </table>
+        {% else %}
+            <p>No tienes empleados cargados</p>
+        {% endif %}
+    </div>
+  </div>
+</div>
+{% endblock %}

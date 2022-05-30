@@ -1,0 +1,52 @@
+{% extends "index.html" %}
+
+{% load bootstrap5 %}
+
+{% block cuerpo %}
+<div class="container">    
+  
+  <div class="row">
+    <div class="col">
+      {% url 'agregar clientes' as agregar_clientes_url %}
+      {% url 'buscar clientes' as buscar_clientes_url %}
+      {% bootstrap_button "Agregar Clientes" button_class="btn-success" button_type="link" href=agregar_clientes_url %} 
+      {% bootstrap_button "Buscar Clientes" button_class="btn-success" button_type="link" href=buscar_clientes_url %}  
+    <div>
+  <div>
+
+  <div class="row">
+    <div class="col">
+        {% if clientes %}
+        <table class="table">
+            <thead>
+                <th scope="col">Identificador</th>
+                <th scope="col">Empresa</th>
+                <th scope="col">CUIT</th>
+                <th scope="col">Contacto</th>
+                <th scope="col">Cargo contacto</th>
+                <th scope="col">Honorarios Mensuales</th>
+                <th scope="col">Acciones</th>
+            </thead>
+        
+            {% for c in clientes %}
+            <tbody>
+                <tr>
+                    <th scope="row">{{c.id}} </th>
+                    <td> {{c.nombre}} </td>
+                    <td> {{c.apellido}} </td>
+                    <td> {{c.email}} </td>
+                    <td> {{c.fecha_nacimiento}} </td>
+                    <td> {{c.dni}} </td>
+                    {% url 'borrar_cliente' identificador=c.id as borrar_cliente_url %}
+                    <td>{% bootstrap_button "Borrar Cliente" size="sm" button_class="btn-danger" button_type="link" href=borrar_cliente_url %}</td>
+                </tr>  
+            </tbody>
+            {% endfor %}
+        </table>
+        {% else %}
+            <p>No tienes clientes cargados</p>
+        {% endif %}
+    </div>
+  </div>
+</div>
+{% endblock %}
