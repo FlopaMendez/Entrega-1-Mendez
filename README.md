@@ -1,92 +1,23 @@
-# Mi Primer MVT Django
+# Entrega intermedia Coderhouse - Python
 
-Ejemplo de MVT para la clase de Coder House python, este codigo contiene:
+MVT para la entrega de Coder House python, este codigo contiene:
  - Vistas 
  - Formularios
  - Modelos
- - Templates
+ - Templates (y Herencia de Templates)
+ - urls
 
-**importnante: Este ejemplo fue probado con python 3.8.13 y Django 4.0.4**
+**importnante: Este ejemplo fue probado con python 3.9.10 y Django 4.0.4**
 
-## Checkear que tengas Python
+## Contenido de la Web:
 
-Para comenzar primero tienen que asegurarse que tienen instalado, python.
+Simula una pagina para una empesa de asesoría que necesita poder cargar/eliminar/Buscar y listar (views.py), a través de formularios de carga (forms.py), las siguientes categorías (models.py):
+ - Clientes de la Empresa 
+ - Empleados de la Empresa
+ - Cantidad de horas trabajadas según cliente
+ 
+## Comienzar su navegacion desde:
 
-En windows tiene que abrir una terminal cmd o powershell.
+http://localhost:8000/home/
 
-```PS
-PS C:\> python --version
-Python 3.X.X 
-```
-
-En Linux/Mac tiene que abrir una terminal bash
-
-```bash
-$ python --version
-Python 3.X.X 
-```
-
-Si les aparece la versión todo OK pueden seguir. Caso contrario descarguen python desde este [link](https://www.python.org/downloads/).
-
-## Instalar django
-
-En una terminal cmd o powershell desde windows:
-
-```PS
-C:\> pip install django
-```
-
-Linux/Mac:
-
-```bash
-$ pip install django
-```
-
-Si no arrojo errores esto es suficiente para poder correr el projecto.
-
-
-# Instalar django bootstrap v5
-
-```PS
-C:\> pip install django-bootstrap-v5
-```
-
-Linux/Mac:
-
-```bash
-$ pip install django-bootstrap-v5
-```
-## Clonar el projecto con git
-
-windows:
-
-```PS
-C:\> git clone https://github.com/martinezger/mi-primer-mvt.git
-```
-
-Linux/Mac:
-```bash
-$ git clone https://github.com/martinezger/mi-primer-mvt.git
-```
-
-## Correr el Servidor
-
-Los siguinetes comandos son analogos en Mac/Linux/Windows:
-
-```bash
-cd mi-primer-mvt
-python manage.py migrate
-```
-La consola mostrara las migraciones de la base de datos que se realizaron.
-
-Luego arrancamos el servidor web
-
-```bash
-python manage.py runserver
-```
-Listo ya tenes corriendo el ejemplo.
-
-ahora Hace click en el siguiente link para ver el ejemplo corriendo: 
-
-[http://localhost:8000/](http://localhost:8000/)
-
+Desde esta página se podrá redirigirse a cualquiera de las categorias mencionadas antes. Además se podrá Agregar, Borrar, Buscar y Listar en cada una de ellas, y navegar entre ellas.
